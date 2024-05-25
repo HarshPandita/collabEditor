@@ -19,7 +19,6 @@ export const EditorPage = () => {
     // console.log(params)
     useEffect(()=>{
             const init = async ()=>{
-                console.log("134")
                 socketRef.current = await initSocket();
                 socketRef.current.on('connect_error', (err)=>handleErrors(err))
                 socketRef.current.on('connect_failed', (err)=>handleErrors(err))
@@ -48,6 +47,7 @@ export const EditorPage = () => {
                     
                 })
                 socketRef.current.on(ACTIONS.DISCONNECTED, ({ userName, socketId})=>{
+                    console.log("disconnected")
                     if (userName !== location.state?.userName){
                         toast.success(`${userName} left the room.`)
                         console.log(`${userName} left the room.`)
